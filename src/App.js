@@ -1,6 +1,8 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 import { HomePage } from "./pages/index.js"
+import "@picocss/pico"
+// ! pico imported here
 
 function App() {
   return (

@@ -12,9 +12,10 @@ function StampData() {
   }
 
   const [stampData, setStampData] = useState(null)
-  const [userState, setUserState] = useState("WA")
+  const [userState, setUserState] = useState("FL")
   const [topResults, setTopResults] = useState([preDefinedObj])
   const [possibleResults, setPossibleResults] = useState([preDefinedObj])
+  const [showPossibleResults, setShowPossibleResults] = useState(true)
 
   /** NPS API params
    * parkCode  = string, 4 char   // search by park code
@@ -41,6 +42,8 @@ function StampData() {
     let formattedOneState = []
     let formattedMultiState = []
     let formMultiParkIndex = []
+
+    console.log("raw data: ", rawStampData)
 
     const locationListArray = rawStampData.data.data
     console.log(locationListArray)
@@ -81,8 +84,6 @@ function StampData() {
       for (let i = 0; i < e.parks.length; i++) {
         const parkElem = e.parks[i].states
         if (parkElem.includes(userState)) {
-          // console.log(`current element ${parkElem} contains ${userState}`)
-          // console.log("index: ", i)
           formMultiParkIndex.push(i)
           break
         }
@@ -124,7 +125,42 @@ function StampData() {
   return (
     <div>
       StampData
-      <p>{topResults[0].fullName}</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Stamp Location</th>
+            <th scope="col">National Park Site</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topResults.map((e, index, arr) => (
+            <tr key={index}>
+              <th scope="row">{index + 1}</th>
+              <td>{e.label}</td>
+              <td>
+                <a href={e.url}> {e.fullName}</a>
+              </td>
+            </tr>
+          ))}
+          {showPossibleResults ? (
+            <tr>
+              <td>SPACING</td>
+            </tr>
+          ) : null}
+          {showPossibleResults
+            ? possibleResults.map((e, index, arr) => (
+                <tr>
+                  <th scope="row">{topResults.length + index + 1}</th>
+                  <td>{e.label}</td>
+                  <td>
+                    <a href={e.url}> {e.fullName}</a>
+                  </td>
+                </tr>
+              ))
+            : null}
+        </tbody>
+      </table>
     </div>
   )
 }
