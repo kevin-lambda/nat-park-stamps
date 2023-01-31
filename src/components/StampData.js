@@ -86,7 +86,7 @@ function StampData(props) {
   let api_nps_q = ``
   let api_nps_limit = 100
   let api_nps_start = 0
-  const API_NPS_KEY = process.env.REACT_APP_API_KEY_NAT_PARK
+  let API_NPS_KEY = process.env.REACT_APP_API_KEY_NAT_PARK
   let API_NPS_URL = `${API_NPS_BASE_URL}${api_nps_category}stateCode=${api_nps_state_code}&limit=${api_nps_limit}&start=${api_nps_start}&api_key=${API_NPS_KEY}`
 
   const parseStampData = (rawStampData) => {
@@ -98,10 +98,7 @@ function StampData(props) {
     let formattedMultiState = []
     let formMultiParkIndex = []
 
-    console.log("raw data: ", rawStampData)
-
     const locationListArray = rawStampData.data.data
-    console.log(locationListArray)
 
     for (const elem of locationListArray) {
       if (elem.parks[0].states === `${userState}`) {
@@ -172,7 +169,6 @@ function StampData(props) {
   useEffect(() => {
     console.log("==============in use effect")
     getData()
-    // calcLocationNumber(userState, checkBoxFlag, topResults, possibleResults)
   }, [userState, checkBoxFlag])
 
   return (
