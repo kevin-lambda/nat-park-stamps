@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 
-function StampData() {
+function StampData(props) {
+  let userState = props.userStateSelect
+  let checkBoxFlag = props.additionalCheckBox
+
   let preDefinedObj = {
     id: "",
     parkCode: "",
@@ -10,12 +13,64 @@ function StampData() {
     url: "",
     type: "",
   }
+  const stateLetterAndFullName = {
+    AL: "Alabama",
+    AK: "Alaska",
+    AZ: "Arizona",
+    AR: "Arkansas",
+    CA: "California",
+    CO: "Colorado",
+    CT: "Connecticut",
+    DE: "Delaware",
+    DC: "District of Columbia",
+    FL: "Florida",
+    GA: "Georgia",
+    HI: "Hawaii",
+    ID: "Idaho",
+    IL: "Illinois",
+    IN: "Indiana",
+    IA: "Iowa",
+    KS: "Kansas",
+    KY: "Kentucky",
+    LA: "Louisiana",
+    ME: "Maine",
+    MD: "Maryland",
+    MA: "Massachusetts",
+    MI: "Michigan",
+    MN: "Minnesota",
+    MS: "Mississippi",
+    MO: "Missouri",
+    MT: "Montana",
+    NE: "Nebraska",
+    NV: "Nevada",
+    NH: "New Hampshire",
+    NJ: "New Jersey",
+    NM: "New Mexico",
+    NY: "New York",
+    NC: "North Carolina",
+    ND: "North Dakota",
+    OH: "Ohio",
+    OK: "Oklahoma",
+    OR: "Oregon",
+    PA: "Pennsylvania",
+    RI: "Rhode Island",
+    SC: "South Carolina",
+    SD: "South Dakota",
+    TN: "Tennessee",
+    TX: "Texas",
+    UT: "Utah",
+    VT: "Vermont",
+    VA: "Virginia",
+    WA: "Washington",
+    WV: "West Virginia",
+    WI: "Wisconsin",
+    WY: "Wyoming",
+  }
 
   const [stampData, setStampData] = useState(null)
-  const [userState, setUserState] = useState("FL")
   const [topResults, setTopResults] = useState([preDefinedObj])
   const [possibleResults, setPossibleResults] = useState([preDefinedObj])
-  const [showPossibleResults, setShowPossibleResults] = useState(true)
+  // const [showPossibleResults, setShowPossibleResults] = useState(true)
 
   /** NPS API params
    * parkCode  = string, 4 char   // search by park code
@@ -117,22 +172,37 @@ function StampData() {
   useEffect(() => {
     console.log("==============in use effect")
     getData()
-  }, [])
-
-  console.log("top: ", topResults)
-  console.log("possible: ", possibleResults)
+    // calcLocationNumber(userState, checkBoxFlag, topResults, possibleResults)
+  }, [userState, checkBoxFlag])
 
   return (
     <div>
-      StampData
+      <h2>
+        {userState && checkBoxFlag
+          ? topResults.length + possibleResults.length
+          : null}
+        {userState && !checkBoxFlag ? topResults.length : null} Passport Stamp
+        Locations for {stateLetterAndFullName[userState]}
+      </h2>
+
+      {!checkBoxFlag && topResults.length < 2 ? (
+        <p>
+          Sorry, there might not be stamp locations exactly in{" "}
+          {stateLetterAndFullName[userState]}, try checking "Show additional
+          locations"
+        </p>
+      ) : null}
       <table>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Stamp Location</th>
-            <th scope="col">National Park Site</th>
-          </tr>
-        </thead>
+        {!checkBoxFlag && topResults.length < 2 ? null : (
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Stamp Location</th>
+              <th scope="col">National Park Site</th>
+            </tr>
+          </thead>
+        )}
+
         <tbody>
           {topResults.map((e, index, arr) => (
             <tr key={index}>
@@ -143,16 +213,12 @@ function StampData() {
               </td>
             </tr>
           ))}
-          {showPossibleResults ? (
-            <tr>
-              <td>SPACING</td>
-            </tr>
-          ) : null}
-          {showPossibleResults
+
+          {checkBoxFlag
             ? possibleResults.map((e, index, arr) => (
-                <tr>
+                <tr key={topResults.length + index + 1}>
                   <th scope="row">{topResults.length + index + 1}</th>
-                  <td>{e.label}</td>
+                  <td>{e.label}*</td>
                   <td>
                     <a href={e.url}> {e.fullName}</a>
                   </td>
