@@ -1,25 +1,6 @@
-/** TO DO list
- *
- * Make header. logo, hero?
- * Make footer.
- * credits
- * about
- * built by
- *
- * extra1
- * how to manually override pico css
- * divide controls from results somehow. color h1? cardify?
- *
- *
- * extra2
- * eval map integration, check if nps api has location data for park or stamp
- *
- *
- *
- */
-
 import React, { useState } from "react"
 import { StampData } from "./index.js"
+import stampLogo from "../assets/stamp3.png"
 
 function Body() {
   const [userState, setUserState] = useState("")
@@ -115,12 +96,23 @@ function Body() {
         </label>
       </fieldset>
 
-      {userState ? (
-        <StampData
-          userStateSelect={userState}
-          additionalCheckBox={additionalCheckBox}
-        />
-      ) : null}
+      <article>
+        {userState ? (
+          <StampData
+            userStateSelect={userState}
+            additionalCheckBox={additionalCheckBox}
+          />
+        ) : (
+          <>
+            <p className="no-data-fetched-yet-p">
+              <img src={stampLogo} alt="stamp logo" width="400px" />
+            </p>
+            <p className="no-data-fetched-yet-p">
+              <i>Your park passport stamps are waiting!</i>
+            </p>
+          </>
+        )}
+      </article>
     </div>
   )
 }

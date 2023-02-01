@@ -2,19 +2,11 @@ import React from "react"
 
 function Navbar() {
   return (
-    <div>
+    <div className="nav">
       <nav>
-        <ul>
-          <li></li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Brand</strong>
-          </li>
-        </ul>
-        <ul>
-          <li></li>
-        </ul>
+        <li>
+          <h1>Find My National Park Stamps</h1>
+        </li>
       </nav>
     </div>
   )

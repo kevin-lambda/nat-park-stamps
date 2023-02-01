@@ -70,15 +70,7 @@ function StampData(props) {
   const [stampData, setStampData] = useState(null)
   const [topResults, setTopResults] = useState([preDefinedObj])
   const [possibleResults, setPossibleResults] = useState([preDefinedObj])
-  // const [showPossibleResults, setShowPossibleResults] = useState(true)
 
-  /** NPS API params
-   * parkCode  = string, 4 char   // search by park code
-   * stateCode = string, 2 char   // search by state
-   * q = string                   // search by q(uery)
-   * limit = int, default 50      // how many results to return
-   * start = int, default 0       // at what result to start, and returns limit amount
-   */
   const API_NPS_BASE_URL = "https://developer.nps.gov/api/v1/"
   let api_nps_category = `passportstamplocations?`
   let api_nps_park_code = ``
@@ -173,13 +165,13 @@ function StampData(props) {
 
   return (
     <div>
-      <h2>
+      <h4>
         {userState && checkBoxFlag
           ? topResults.length + possibleResults.length
           : null}
         {userState && !checkBoxFlag ? topResults.length : null} Passport Stamp
         Locations for {stateLetterAndFullName[userState]}
-      </h2>
+      </h4>
 
       {!checkBoxFlag && topResults.length < 2 ? (
         <p>
@@ -214,7 +206,10 @@ function StampData(props) {
             ? possibleResults.map((e, index, arr) => (
                 <tr key={topResults.length + index + 1}>
                   <th scope="row">{topResults.length + index + 1}</th>
-                  <td>{e.label}*</td>
+                  <td>
+                    {e.label}
+                    <strong>*</strong>
+                  </td>
                   <td>
                     <a href={e.url}> {e.fullName}</a>
                   </td>
