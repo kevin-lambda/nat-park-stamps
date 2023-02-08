@@ -16,3 +16,4 @@ Finds national park passport stamps for you based on your state. Due to the impl
 ## Acknowledgements
 
 - The National Park Service for designating space to enjoy, appreciate and experience nature.
+<!--  -->
