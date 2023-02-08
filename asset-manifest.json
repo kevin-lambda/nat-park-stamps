@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/nat-park-stamps/static/css/main.53ac3c38.css",
-    "main.js": "/nat-park-stamps/static/js/main.f58a4280.js",
+    "main.js": "/nat-park-stamps/static/js/main.9e6c249f.js",
     "static/media/stamp3.png": "/nat-park-stamps/static/media/stamp3.8c7e15bf780f5d5bd754.png",
     "index.html": "/nat-park-stamps/index.html",
     "main.53ac3c38.css.map": "/nat-park-stamps/static/css/main.53ac3c38.css.map",
-    "main.f58a4280.js.map": "/nat-park-stamps/static/js/main.f58a4280.js.map"
+    "main.9e6c249f.js.map": "/nat-park-stamps/static/js/main.9e6c249f.js.map"
   },
   "entrypoints": [
     "static/css/main.53ac3c38.css",
-    "static/js/main.f58a4280.js"
+    "static/js/main.9e6c249f.js"
   ]
 }
