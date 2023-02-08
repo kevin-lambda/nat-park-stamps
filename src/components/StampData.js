@@ -185,8 +185,8 @@ function StampData(props) {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Stamp Location</th>
               <th scope="col">National Park Site</th>
+              <th scope="col">Stamp Location</th>
             </tr>
           </thead>
         )}
@@ -195,10 +195,10 @@ function StampData(props) {
           {topResults.map((e, index, arr) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{e.label}</td>
               <td>
                 <a href={e.url}> {e.fullName}</a>
               </td>
+              <td>{e.label}</td>
             </tr>
           ))}
 
@@ -207,11 +207,11 @@ function StampData(props) {
                 <tr key={topResults.length + index + 1}>
                   <th scope="row">{topResults.length + index + 1}</th>
                   <td>
-                    {e.label}
-                    <strong>*</strong>
+                    <a href={e.url}> {e.fullName}</a>
                   </td>
                   <td>
-                    <a href={e.url}> {e.fullName}</a>
+                    {e.label}
+                    <strong>*</strong>
                   </td>
                 </tr>
               ))
